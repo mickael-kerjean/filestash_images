@@ -1,0 +1,20 @@
+{
+  "name": "filestash_images",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "screenshot": "jest src/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mickael-kerjean/filestash_images.git"
+  },
+  "author": "Martin Lalanne & Mickael Kerjean",
+  "license": "AGPL",
+  "dependencies": {
+    "jest": "^23.6.0",
+    "jest-puppeteer": "^3.7.0",
+    "puppeteer": "^1.11.0"
+  }
+}
