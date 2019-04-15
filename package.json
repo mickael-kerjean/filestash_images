@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "screenshot": "jest src/*"
+    "screenshot": "jest src/* --runInBand"
   },
   "repository": {
     "type": "git",
