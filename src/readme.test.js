@@ -2,12 +2,10 @@ const files = require("../../test/e2e/helpers/files"),
       wait = require("./helpers/wait");
 
 describe('README::navigation', () => {
-    beforeAll(async () => {
+    it("gif::navigation", async () => {
         await page.goto("http://demo.filestash.app/login");
         await page.setViewport({width: 824, height: 360});
-    }, 20000);
 
-    it("normal navigation", async () => {
         // enter form data and take relevant screenshot
         await expect(page).toClick("button", { text: "SFTP", timeout: 10000 });
         await page.screenshot({path: "/tmp/screenshot/navigation_0000.png"});
@@ -57,7 +55,10 @@ describe('README::navigation', () => {
         await page.screenshot({path: "/tmp/screenshot/navigation_0009.png"});
     }, 40000);
 
-    it("navigation photos", async () => {
+    it("gif::media", async () => {
+        await page.goto("http://demo.filestash.app/login");
+        await page.setViewport({width: 824, height: 360});
+
         await expect(page).toClick("button", { text: "SFTP", timeout: 10000 });
         await expect(page).toFillForm("form", {
             "hostname": "hal.kerjean.me",
@@ -116,6 +117,6 @@ describe('README::navigation', () => {
         await page.evaluate(() => document.querySelector(".component_menubar").style.display = "");
         await page.evaluate(() => document.querySelector(".component_breadcrumb").style.display = "");
         await page.screenshot({path: "/tmp/screenshot/media_0009.png"});
-
     }, 60000);
+
 })
