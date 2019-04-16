@@ -1,5 +1,6 @@
 const files = require("../../test/e2e/helpers/files"),
-      wait = require("./helpers/wait");
+      wait = require("./helpers/wait"),
+      exec = require('child_process').exec;
 
 describe('README::navigation', () => {
     it("gif::navigation", async () => {
@@ -26,13 +27,12 @@ describe('README::navigation', () => {
         await expect(page).toMatchElement(".component_loader", { timeout: 5000 });
 
         // now that we've logged in, let's navigate around
-        await wait.sleep(1000);
-        await page.screenshot({path: "/tmp/screenshot/navigation_0004.png"});
         await expect(page).toMatchElement(".list", { timeout: 20000 });
         await expect(page).toMatchElement(".component_filename", {
             text: "blog"
         });
         await wait.sleep(1000);
+        await page.screenshot({path: "/tmp/screenshot/navigation_0004.png"});
         await page.screenshot({path: "/tmp/screenshot/navigation_0005.png"});
         await page.evaluate(() => document.querySelector(".scroll-y").scrollBy(0, 112));
         await page.screenshot({path: "/tmp/screenshot/navigation_0006.png"});
@@ -53,6 +53,7 @@ describe('README::navigation', () => {
         await expect(page).toMatchElement(".component_fab", {timeout: 5000});
         await wait.sleep(1000);
         await page.screenshot({path: "/tmp/screenshot/navigation_0009.png"});
+        await exec("convert -delay 100 -loop 0 /tmp/screenshot/navigation_00{00..09}.png .assets/navigation.gif");
     }, 40000);
 
     it("gif::media", async () => {
@@ -99,24 +100,27 @@ describe('README::navigation', () => {
         await page.evaluate(() => document.querySelector(".component_breadcrumb").style.display = 'none');
         await page.screenshot({path: "/tmp/screenshot/media_0004.png"});
         await expect(page).toFill(".component_pager form input", "259");
+        await page.screenshot({path: "/tmp/screenshot/media_0005.png"});
         await page.keyboard.press('Enter');
         await wait.sleep(5000);
-        await page.screenshot({path: "/tmp/screenshot/media_0005.png"});
+        await page.screenshot({path: "/tmp/screenshot/media_0006.png"});
 
         await page.evaluate(() => document.querySelector("img.photo").style.transform = "translateX(-50px)");
         await wait.sleep(1000)
-        await page.screenshot({path: "/tmp/screenshot/media_0006.png"});
+        await page.screenshot({path: "/tmp/screenshot/media_0007.png"});
         await page.evaluate(() => document.querySelector("img.photo").style.transform = "translateX(-300px)");
         await wait.sleep(1000)
-        await page.screenshot({path: "/tmp/screenshot/media_0007.png"});
+        await page.screenshot({path: "/tmp/screenshot/media_0008.png"});
         await expect(page).toClick(".component_icon[alt=\"arrow_right_white\"]", { timeout: 5000 });
         await wait.sleep(1000);
-        await page.screenshot({path: "/tmp/screenshot/media_0008.png"});
+        await page.screenshot({path: "/tmp/screenshot/media_0009.png"});
 
         await page.evaluate(() => document.querySelector(".component_image_container").classList.remove("fullscreen"));
         await page.evaluate(() => document.querySelector(".component_menubar").style.display = "");
         await page.evaluate(() => document.querySelector(".component_breadcrumb").style.display = "");
-        await page.screenshot({path: "/tmp/screenshot/media_0009.png"});
+        await page.screenshot({path: "/tmp/screenshot/media_0010.png"});
+
+        await exec("convert -delay 100 -loop 0 /tmp/screenshot/media_00{01..10}.png .assets/photo_management.gif");
     }, 60000);
 
 })
